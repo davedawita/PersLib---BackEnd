@@ -21,8 +21,7 @@ Users will need to signup and login if they need to access the app.
 
  - Please see the wireframe for the index page below: </br></br>
 
-![image](https://github.com/davedawita/PersLib---FrontEnd/assets/155693018/5d6d094d-063e-4680-a5ac-cb491cd3fe85)
-
+![image](https://github.com/davedawita/PersLib---BackEnd/assets/155693018/c6b4b9c0-24ca-4697-aac6-d0d1386739b9)
 
 
  - Please see the wireframe for the show page page below: </br></br>
