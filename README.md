@@ -79,6 +79,19 @@ class Perslib(models.Model):</br></br>
     date = models.TimeField(auto_now=False, auto_now_add=False)</br>
     description = models.CharField(max_length=20)</br></br>
     
+ **<h3>ROUTES:</h3>**     
+User Routes:
+
+POST /users/register/: Register a new user
+POST /users/login/: Login a user
+GET /users/profile/: Get user profile details
+
+Library Routes:
+
+POST /perslib/: This adds a new document (picture, video, etc.)
+GET /perslib/: This list all documents
+PUT /perslib/:id/: Update list
+DELETE /perslib/:id/: Delete a listed document   
 
 <h2>Installation Instructions</h2>
  - Please use the link below to install the app. Enjoy the app!   </br>
