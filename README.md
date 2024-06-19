@@ -99,7 +99,7 @@ DELETE /perslib/:id/: Delete a listed document
  
 If you are on a browser, use of Google chrome is highly recommended.    </br>
 <h2>Technologies used</h2>
-Python (Backend programming Language), Django (Backend Framework), REACT (FrontEnd Framework), Javascript, Node.js (Server Side JavaScript runtime), HTML, tailwind CSS, ejs, Postgres (Database), Postman, and Figma(Only for wireframes without Dev Mode). We can also say that we use Python-Django stack.  </br>
+Python (Backend programming Language), Django (Backend Framework), REACT (FrontEnd Framework), Javascript, Node.js (Server Side JavaScript runtime), HTML, tailwind CSS, Postgres (Database), Postman, and Figma(Only for wireframes without Dev Mode). We can also say that we use Python-Django stack.  </br>
 
 <h2>MVP Goals</h2>
 Full CRUD(Create, Read, Update, Delete) Functionality. </br>
