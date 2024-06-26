@@ -26,12 +26,12 @@ Controllers are the actual functions themselves in views.py invoked from a HTTP 
 
 **<h3>MODELS:</h3>** 
 The following models are included: </br></br>
-<b>perslib/users/manager.py:</b></br>
 
-class User(Manager):</br>
-   
-    def create_user(self, username, password, **extra_fields):</br>
-        
+<h2><b>perslib/users/manager.py:</b></h2></br>
+  
+    class User(Manager):</br>
+    
+      def create_user(self, username, password, **extra_fields):</br>        
         if not username:</br>
             raise ValueError(_("The username must be set"))</br>
         email = self.normalize_username(username)</br>
@@ -39,32 +39,41 @@ class User(Manager):</br>
         user.set_password(password)</br>
         user.save()</br>
         return user</br></br>
+        
+ <h2><b>perslib/Years.py:</b>h2></b></br>
+     class Years(models.Model):</br></br>    
+        Year = models.CharField(max_length=20)</br></br>  
+  
+<h2><b>perslib/titles.py:</b>h2></b></br>
+     class Title(models.Model):</br></br>    
+        title = models.CharField(max_length=20)</br></br>    
 
-
-<b>perslib/models.py:</b></br>
-class Perslib(models.Model):</br></br>
-    date = models.TimeField(auto_now=False, auto_now_add=False)</br>
-    description = models.CharField(max_length=20)</br></br>
-    
- **<h3>ROUTES:</h3>**     
-User Routes:
+<h2><b>perslib/models.py:</b>h2></b></br>
+     class Perslib(models.Model):</br></br>
+        description = models.CharField(max_length=100)</br>
+        date = models.DateField(auto_now=False, auto_now_add=False)</br>
+        time = models.TimeField(auto_now=False, auto_now_add=False) </br>
+        
+ <h2>ROUTES:</h2>   
+ 
+ - **<h2>User Routes:</h2>**
 
 POST /users/register/: Register a new user</br>
 POST /users/login/: Login a user</br>
 GET /users/profile/: Get user profile details</br>
 
-Index Page Route:
+ - **<h2>Index Page Route:</h2>** 
 
 GET /: This lists the dates which will direct us to titles page</br>
 
-Titles Page Routes:
+ - **<h2>Titles Page Routes:</h2>** 
 
 POST /title/: This adds a new title</br>
 GET /title/: This lists all titles</br>
 PUT /title/:id/: This updates a title</br>
 DELETE /title/:id/: This deletes a title</br>
 
-Documents/Perslib Routes:
+ - **<h2>Documents/Perslib Routes:</h2>** 
 
 POST /perslib/: This adds a new document (picture, video, etc.)</br>
 GET /perslib/: This list all documents</br>
