@@ -55,6 +55,10 @@ The app resides in App.js. User log-in/createaccount code is also in App.js.</br
 
 **<h3>Back-end Repository</h3>**
 The backend repo can be accessed through the link below:</br>
+Important Note:</br>
+Models are the database tables represented in Django as Python classes.</br>
+Views are the HTML returned from function in views.py.</br>
+Controllers are the actual functions themselves in views.py invoked from a HTTP request.</br>
 
 
 **<h3>MODELS:</h3>** 
