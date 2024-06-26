@@ -40,15 +40,18 @@ The following models are included: </br></br>
         user.save()</br>
         return user</br></br>
         
- <h2><b>perslib/Years.py:</b>h2></b></br>
-     class Years(models.Model):</br></br>    
+ <h2><b>perslib/Years.py:</b></h2></b></br>
+  
+     class Years(models.Model):</br></br>      
         Year = models.CharField(max_length=20)</br></br>  
   
-<h2><b>perslib/titles.py:</b>h2></b></br>
+<h2><b>perslib/titles.py:</b></h2></b></br>
+ 
      class Title(models.Model):</br></br>    
         title = models.CharField(max_length=20)</br></br>    
 
-<h2><b>perslib/models.py:</b>h2></b></br>
+<h2><b>perslib/models.py:</b></h2></b></br>
+ 
      class Perslib(models.Model):</br></br>
         description = models.CharField(max_length=100)</br>
         date = models.DateField(auto_now=False, auto_now_add=False)</br>
@@ -140,7 +143,6 @@ If you are on a browser, use of Google chrome is highly recommended.    </br>
 ![CSS](https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white)
 ![TAILWINDCSS](https://img.shields.io/badge/tailwindcss-0F172A?&logo=tailwindcss)
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-r=white)
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
 ![VSCode](https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
