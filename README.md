@@ -116,6 +116,7 @@ The app resides in App.js. User log-in/createaccount code is also in App.js.</br
  
 If you are on a browser, use of Google chrome is highly recommended.    </br>
 <h2>Technologies used</h2>
+
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
