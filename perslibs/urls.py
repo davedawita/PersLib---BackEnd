@@ -18,11 +18,15 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from perslib.views import PerslibViewSet
+from perslib.views import UserViewSet
 
-router = routers.DefaultRouter()
-router.register(r'perslib',PerslibViewSet) #register "/perslib" routes
+router = routers.SimpleRouter()
+
+router.register(r'user',UserViewSet)
+#router.register(r'perslib',PerslibViewSet) #register "/perslib" routes
 
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
+   
 ]
