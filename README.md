@@ -12,6 +12,77 @@ The PersLib app has two repositories:</br>
 Users will need to create account and login if they need to access the app.
 
 
+
+
+<h2>PersLib---Back-End</h2>
+
+**<h3>Back-end Repository</h3>**
+The backend repo can be accessed through the link below:</br>
+Important Note:</br>
+Models are the database tables represented in Django as Python classes.</br>
+Views are the HTML returned from function in views.py.</br>
+Controllers are the actual functions themselves in views.py invoked from a HTTP request.</br>
+
+
+**<h3>MODELS:</h3>** 
+The following models are included: </br></br>
+
+<h2><b>perslib/users/manager.py:</b></h2></br>
+  
+    class User(Manager):</br>
+    
+      def create_user(self, username, password, **extra_fields):</br>        
+        if not username:</br>
+            raise ValueError(_("The username must be set"))</br>
+        email = self.normalize_username(username)</br>
+        user = self.model(username=username, **extra_fields)</br>
+        user.set_password(password)</br>
+        user.save()</br>
+        return user</br></br>
+        
+ <h2><b>perslib/Years.py:</b></h2></b></br>
+  
+     class Years(models.Model):</br></br>      
+        Year = models.CharField(max_length=20)</br></br>  
+  
+<h2><b>perslib/titles.py:</b></h2></b></br>
+ 
+     class Title(models.Model):</br></br>    
+        title = models.CharField(max_length=20)</br></br>    
+
+<h2><b>perslib/models.py:</b></h2></b></br>
+ 
+     class Perslib(models.Model):</br></br>
+        description = models.CharField(max_length=100)</br>
+        date = models.DateField(auto_now=False, auto_now_add=False)</br>
+        time = models.TimeField(auto_now=False, auto_now_add=False) </br>
+        
+ <h2>ROUTES:</h2>   
+ 
+ - **<h2>User Routes:</h2>**
+
+POST /users/register/: Register a new user</br>
+POST /users/login/: Login a user</br>
+GET /users/profile/: Get user profile details</br>
+
+ - **<h2>Index Page Route:</h2>** 
+
+GET /: This lists the dates which will direct us to titles page</br>
+
+ - **<h2>Titles Page Routes:</h2>** 
+
+POST /title/: This adds a new title</br>
+GET /title/: This lists all titles</br>
+PUT /title/:id/: This updates a title</br>
+DELETE /title/:id/: This deletes a title</br>
+
+ - **<h2>Documents/Perslib Routes:</h2>** 
+
+POST /perslib/: This adds a new document (picture, video, etc.)</br>
+GET /perslib/: This list all documents</br>
+PUT /perslib/:id/: This updates a document</br>
+DELETE /perslib/:id/: This deletes a document</br>
+
  <h2> PersLib---Front-End </h2></br>
 
  **<h3>Front-end Repository</h3>**
@@ -51,59 +122,38 @@ User Stories
 The folder structure includes components: Header, main & pages: Create, Edit, Index, & Show.</br>
 The app resides in App.js. User log-in/createaccount code is also in App.js.</br>
 
-<h2>PersLib---Back-End</h2>
-
-**<h3>Back-end Repository</h3>**
-The backend repo can be accessed through the link below:</br>
-Important Note:</br>
-Models are the database tables represented in Django as Python classes.</br>
-Views are the HTML returned from function in views.py.</br>
-Controllers are the actual functions themselves in views.py invoked from a HTTP request.</br>
-
-
-**<h3>MODELS:</h3>** 
-The following models are included: </br></br>
-<b>perslib/users/manager.py:</b></br>
-
-class User(Manager):</br>
-   
-    def create_user(self, username, password, **extra_fields):</br>
-        
-        if not username:</br>
-            raise ValueError(_("The username must be set"))</br>
-        email = self.normalize_username(username)</br>
-        user = self.model(username=username, **extra_fields)</br>
-        user.set_password(password)</br>
-        user.save()</br>
-        return user</br></br>
-
-
-<b>perslib/models.py:</b></br>
-class Perslib(models.Model):</br></br>
-    date = models.TimeField(auto_now=False, auto_now_add=False)</br>
-    description = models.CharField(max_length=20)</br></br>
-    
- **<h3>ROUTES:</h3>**     
-User Routes:
-
-POST /users/register/: Register a new user
-POST /users/login/: Login a user
-GET /users/profile/: Get user profile details
-
-Library Routes:
-
-POST /perslib/: This adds a new document (picture, video, etc.)
-GET /perslib/: This list all documents
-PUT /perslib/:id/: Update list
-DELETE /perslib/:id/: Delete a listed document   
-
 <h2>Installation Instructions</h2>
  - Please use the link below to install the app. Enjoy the app!   </br>
  
  
 If you are on a browser, use of Google chrome is highly recommended.    </br>
 <h2>Technologies used</h2>
-Python (Backend programming Language), Django (Backend Framework), REACT (FrontEnd Framework), Javascript, Node.js (Server Side JavaScript runtime), HTML, tailwind CSS, Postgres (Database), Postman, and Figma(Only for wireframes without Dev Mode). We can also say that we use Python-Django stack.  </br>
+
+![PYTHON](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![DJANGO](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![POSTGRESQL](https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white)
+![SQlite](https://img.shields.io/badge/SQLite-blue?logo=sqlite&logoColor=white)
+![Gunicorn Badge](https://img.shields.io/badge/Gunicorn-499848?logo=gunicorn&logoColor=fff&style=for-the-badge)
+![.ENV Badge](https://img.shields.io/badge/.ENV-ECD53F?logo=dotenv&logoColor=000&style=for-the-badge)
+![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white)
+![TAILWINDCSS](https://img.shields.io/badge/tailwindcss-0F172A?&logo=tailwindcss)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
+![VSCode](https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
+![JSON](https://img.shields.io/badge/json-5E5C5C?style=for-the-badge&logo=json&logoColor=white)
+![FIGMA](https://img.shields.io/badge/figma-%23F24E1E?style=for-the-badge&logo=figma&logoColor=white)
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
+![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
+![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)
+
+
+We can also say that we use Python-Django stack.  </br>
 
 <h2>MVP Goals</h2>
 Full CRUD(Create, Read, Update, Delete) Functionality. </br>
