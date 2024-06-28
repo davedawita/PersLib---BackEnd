@@ -1,4 +1,6 @@
 from .models import User
+from .models import Login
+from .models import Logout
 from .models import Year
 from .models import Title
 from .models import Perslib
@@ -6,10 +8,25 @@ from .models import Perslib
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 
+#User Serializers:
+
 class UserSerializer(serializers.ModelSerializer):
   class Meta:
     model = User
-    fields = ('id', 'first_name', 'last_name', 'username', 'password', 'image') 
+    fields = ('id', 'first_name', 'last_name', 'username', 'password') 
+
+class LoginSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Login
+    fields = ('id', 'username', 'password') 
+
+class LogoutSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Logout
+    fields = ('id', 'username', 'password') 
+
+
+#Other Serializers:
 
 class YearSerializer(serializers.ModelSerializer):
   class Meta:
@@ -18,7 +35,7 @@ class YearSerializer(serializers.ModelSerializer):
 
 class TitleSerializer(serializers.ModelSerializer):
   class Meta:
-    model = User
+    model = Title
     fields = ('title') 
 
 

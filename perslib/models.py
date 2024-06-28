@@ -1,12 +1,24 @@
 from django.db import models
 
+#User Models:
+
 class User(models.Model):
   first_name = models.CharField(max_length=30)
   last_name = models.CharField(max_length=30)
   username = models.CharField(max_length=30)
   password = models.CharField(max_length=32)
-  image = models.ImageField(upload_to='images')
+  # profileimages = models.ImageField(upload_to='images')
 
+class Login(models.Model):  
+  username = models.CharField(max_length=30)
+  password = models.CharField(max_length=32) 
+
+class Logout(models.Model):  
+  username = models.CharField(max_length=30)
+  password = models.CharField(max_length=32)
+
+
+#Other Models:
 
 class Year(models.Model):
   year = models.PositiveIntegerField()

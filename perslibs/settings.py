@@ -38,16 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'perslib.apps.PerslibConfig',
-    'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework'
+    
 ]
 
-#Authentication
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',        
-    ]
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -91,11 +85,6 @@ DATABASES = {
 }
 
 
-
-
-
-
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -136,3 +125,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Authentication
+REST_FRAMEWORK = {
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ]
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [                         #Here, I selected and put Basic Authentication out of the other authentication types. It provides access based on authentication against a user's username and password.
+    #This is the place where I set the authentication globally instead of on a per-view basis.
+        'rest_framework.authentication.BasicAuthentication',        
+    ]
+}

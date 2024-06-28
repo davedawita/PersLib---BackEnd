@@ -17,16 +17,25 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from perslib.views import PerslibViewSet
-from perslib.views import UserViewSet
+from perslib.views import UserViewSet, LoginViewSet, LogoutViewSet, YearViewSet, TitleViewSet, PerslibViewSet 
 
-router = routers.SimpleRouter()
+#Notes:
+#ViewSets allow the developer to concentrate on modeling the state and interactions of the API, and leave the URL construction to be handled automatically. ViewSet classes are almost the same thing as View classes, except that they provide operations such as retrieve, or update, and not method handlers such as get or put.
 
-router.register(r'user',UserViewSet)
-#router.register(r'perslib',PerslibViewSet) #register "/perslib" routes
+# Because we're using ViewSet classes rather than View classes, we actually don't need to design the URL conf ourselves. The conventions for wiring up resources into views and urls can be handled automatically, using a Router class. All we need to do is register the appropriate view sets with a router, and let it do the rest.https://www.django-rest-framework.org/tutorial/6-viewsets-and-routers/#using-routers
+
+
+router = routers.DefaultRouter()
+router.register(r'user',UserViewSet, basename='user')
+router.register(r'login',LoginViewSet, basename='login')
+router.register(r'logout',LogoutViewSet, basename='logout')
+
+router.register(r'year',YearViewSet, basename='year')     
+router.register(r'title',TitleViewSet, basename='title')   
+router.register(r'perslib',PerslibViewSet, basename='perslib') 
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('admin/', admin.site.urls),
-   
+    
+    path('admin/', admin.site.urls),        
+    path('', include(router.urls)), #Here, we include all the urls which are in the router above
 ]
