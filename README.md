@@ -12,8 +12,6 @@ The PersLib app has two repositories:</br>
 Users will need to create account and login if they need to access the app.
 
 
-
-
 <h2>PersLib---Back-End</h2>
 
 **<h3>Back-end Repository</h3>**
@@ -22,35 +20,39 @@ Important Note:</br>
 Models are the database tables represented in Django as Python classes.</br>
 Views are the HTML returned from function in views.py.</br>
 Controllers are the actual functions themselves in views.py invoked from a HTTP request.</br>
+I included both basic and token authentication methods to authorize user requests and enable them to create account, login, and logout.
 
 
 **<h3>MODELS:</h3>** 
 The following models are included: </br></br>
 
-<h2><b>perslib/users/manager.py:</b></h2></br>
+<h2><b>perslib/models/user/:</b></h2></br>
   
-    class User(Manager):</br>
-    
-      def create_user(self, username, password, **extra_fields):</br>        
-        if not username:</br>
-            raise ValueError(_("The username must be set"))</br>
-        email = self.normalize_username(username)</br>
-        user = self.model(username=username, **extra_fields)</br>
-        user.set_password(password)</br>
-        user.save()</br>
-        return user</br></br>
+    class User(models.Model):    
+      first_name = models.CharField(max_length=30)
+      last_name = models.CharField(max_length=30)
+      username = models.CharField(max_length=30)
+      password = models.CharField(max_length=32)
+      # profileimages = models.ImageField(upload_to='images')
+      REQUIRED_FIELDS = ['first_name', 'last_name', 'username', 'password']
+      
+<h2><b>perslib/models/login/:</b></h2></br>
+
+    class Login(models.Model)    
+      username = models.CharField(max_length=30)
+      password = models.CharField(max_length=32) 
         
- <h2><b>perslib/Years.py:</b></h2></b></br>
+ <h2><b>perslib/models/year:</b></h2></b></br>
   
-     class Years(models.Model):</br></br>      
+     class Year(models.Model):</br></br>      
         Year = models.CharField(max_length=20)</br></br>  
   
-<h2><b>perslib/titles.py:</b></h2></b></br>
+<h2><b>perslib/models/title:</b></h2></b></br>
  
      class Title(models.Model):</br></br>    
         title = models.CharField(max_length=20)</br></br>    
 
-<h2><b>perslib/models.py:</b></h2></b></br>
+<h2><b>perslib/models/perslib:</b></h2></b></br>
  
      class Perslib(models.Model):</br></br>
         description = models.CharField(max_length=100)</br>
@@ -60,24 +62,23 @@ The following models are included: </br></br>
  <h2>ROUTES:</h2>   
  
  - **<h2>User Routes:</h2>**
-
-POST /users/register/: Register a new user</br>
-POST /users/login/: Login a user</br>
-GET /users/profile/: Get user profile details</br>
+POST /user/: Register a new user</br>
+POST /login/: Login a user</br>
+POST /logout/: Logs out a user</br>
+GET /user/profile/: Get user profile details</br>
 
  - **<h2>Index Page Route:</h2>** 
-
-GET /: This lists the dates which will direct us to titles page</br>
+POST/year: This creates the years
+GET /year: This lists the years which will direct us to titles page</br>
+Note: Editing and deleting the years is not allowed. I used "ReadOnlyModelViewSet" for the viewset class in views.py.
 
  - **<h2>Titles Page Routes:</h2>** 
-
 POST /title/: This adds a new title</br>
 GET /title/: This lists all titles</br>
 PUT /title/:id/: This updates a title</br>
 DELETE /title/:id/: This deletes a title</br>
 
  - **<h2>Documents/Perslib Routes:</h2>** 
-
 POST /perslib/: This adds a new document (picture, video, etc.)</br>
 GET /perslib/: This list all documents</br>
 PUT /perslib/:id/: This updates a document</br>
