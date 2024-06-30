@@ -8,15 +8,11 @@ class User(models.Model):
   username = models.CharField(max_length=30)
   password = models.CharField(max_length=32)
   # profileimages = models.ImageField(upload_to='images')
+  REQUIRED_FIELDS = ['first_name', 'last_name', 'username', 'password']
 
 class Login(models.Model):  
   username = models.CharField(max_length=30)
   password = models.CharField(max_length=32) 
-
-class Logout(models.Model):  
-  username = models.CharField(max_length=30)
-  password = models.CharField(max_length=32)
-
 
 #Other Models:
 
@@ -24,7 +20,7 @@ class Year(models.Model):
   year = models.PositiveIntegerField()
 
 class Title(models.Model):
-  title = models.PositiveIntegerField()
+  title = models.CharField(max_length=20)   
 
 class Perslib(models.Model):
   description = models.CharField(max_length=100)

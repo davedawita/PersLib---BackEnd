@@ -14,28 +14,31 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+# from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from perslib.views import UserViewSet, LoginViewSet, LogoutViewSet, YearViewSet, TitleViewSet, PerslibViewSet 
+from perslib.views import UserViewSet, YearViewSet, TitleViewSet, PerslibViewSet, LoginViewSet, Logout
+from perslib import views
 
 #Notes:
 #ViewSets allow the developer to concentrate on modeling the state and interactions of the API, and leave the URL construction to be handled automatically. ViewSet classes are almost the same thing as View classes, except that they provide operations such as retrieve, or update, and not method handlers such as get or put.
 
 # Because we're using ViewSet classes rather than View classes, we actually don't need to design the URL conf ourselves. The conventions for wiring up resources into views and urls can be handled automatically, using a Router class. All we need to do is register the appropriate view sets with a router, and let it do the rest.https://www.django-rest-framework.org/tutorial/6-viewsets-and-routers/#using-routers
 
-
+#Now, we need to register the view set we created in views.py to the urls:
 router = routers.DefaultRouter()
 router.register(r'user',UserViewSet, basename='user')
-router.register(r'login',LoginViewSet, basename='login')
-router.register(r'logout',LogoutViewSet, basename='logout')
+router.register(r'login',LoginViewSet, basename='login')  # We need to give it a basename because it is not a model viewset and django rest framework will not identify this router.
+# router.register(r'logout',Logout)
 
-router.register(r'year',YearViewSet, basename='year')     
-router.register(r'title',TitleViewSet, basename='title')   
-router.register(r'perslib',PerslibViewSet, basename='perslib') 
+router.register(r'year',YearViewSet)     
+router.register(r'title',TitleViewSet)   
+router.register(r'perslib',PerslibViewSet) 
 
 urlpatterns = [
-    
-    path('admin/', admin.site.urls),        
+
+    # path('admin/', admin.site.urls),        
     path('', include(router.urls)), #Here, we include all the urls which are in the router above
+    path("logout/", Logout.as_view(), name="logout")   
+    
 ]

@@ -1,64 +1,68 @@
-
-from django.shortcuts import render
-
-from .models import User, Login, Logout, Year, Title, Perslib
-from .serializers import UserSerializer, LoginSerializer, LogoutSerializer, YearSerializer, TitleSerializer, PerslibSerializer 
+from .models import User, Login, Year, Title, Perslib
+from .serializers import UserSerializer, LoginSerializer, YearSerializer, TitleSerializer, PerslibSerializer
 
 from rest_framework import viewsets
-from rest_framework import permissions
-from rest_framework import serializers
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework import filters
+
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+from rest_framework.authtoken.views import ObtainAuthToken, APIView
+from rest_framework.settings import api_settings
 
 from rest_framework.decorators import action
+from rest_framework import permissions
+from rest_framework import serializers
 from rest_framework.response import Response
+from rest_framework import status
 
 #Note: ReadOnlyModelViewSet only provide 'read-only' actions:list & .retrieve(). But, ModelViewSet on the otherhand provides the actions: .list(), .retrieve(), .create(), .update(), .partial_update(), and .destroy().
 
 #Authentication classes:
 
 class UserViewSet(viewsets.ModelViewSet):
-  queryset = User.objects.all()
+  #Handles reading, creating and updating user profiles
   serializer_class = UserSerializer
-  permission_classes = [permissions.AllowAny]    # Eventhough I set the authentication globally, we need to set the permission class since, by default the permission class is set to AllowAny.
+  permission_classes = [permissions.AllowAny]
+  queryset = User.objects.all()     #This queryset tells the viewset how to retrieve the object from the database 
+  filter_backend = (filters.SearchFilter,)
+  search_Fields = ('first_name', 'username')
 
-  # A viewset may mark extra actions for routing by decorating a method with the @action decorator. These extra actions will be included in the generated routes. For example, given the set_password method on the UserViewSet class:
-  @action(methods=['post'], detail=False, permission_classes=[permissions.AllowAny])
-  def register(self, request):
-      serializer = self.get_serializer(data=request.data)
-      serializer.is_valid(raise_exception=True)
-      self.perform_create(serializer)
-      headers = self.get_success_headers(serializer.data)
-      return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+class LoginViewSet(viewsets.ViewSet):
+  #This checks username and password and returns an auth token.
+  serializer_class = AuthTokenSerializer
+  permission_classes = [permissions.AllowAny]
+  def create(self, request):
+    #Use the ObtainAuthToken APIView to validate and create a token.
+    #Handle creating user authentication tokens
+    renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
+    return ObtainAuthToken().as_view()(request=request._request) 
   
-  
 
-class LoginViewSet(viewsets.ModelViewSet):
-  queryset = Login.objects.all()
-  serializer_class = LoginSerializer
-  permission_classes = [permissions.IsAuthenticated]
-
-class LogoutViewSet(viewsets.ModelViewSet):
-  queryset = Logout.objects.all()
-  serializer_class = LogoutSerializer
-  permission_classes = [permissions.IsAuthenticated]
-
+class Logout(APIView):
+  permission_classes = [permissions.AllowAny]
+  def post(self, request,format=None):
+    #To delete the token to force a login:
+    request.user.auth_token.delete()
+    return Response(status=status.HTTP_200_OK)
 
 #Index page (Years):
-class YearViewSet(viewsets.ReadOnlyModelViewSet):
+# Eventhough I set the authentication globally, I need to set the permission class since, by default the permission class is set to AllowAny.
+
+class YearViewSet(viewsets.ModelViewSet):
   queryset = Year.objects.all()
   serializer_class = YearSerializer
   permission_classes = [permissions.AllowAny]   #I let the index page visible without a need for authorization.
 
+
 #First show page (Titles):
-class TitleViewSet(viewsets.ModelViewSet):
+class TitleViewSet(viewsets.ReadOnlyModelViewSet):   #Here, I used ReadOnlyModelViewSet. This does not allow editing! If checked by postman,PUT will not succeed to change anything.
   queryset = Title.objects.all()
   serializer_class = TitleSerializer
   permission_classes = [permissions.IsAuthenticated]     #Title page needs authorization
 
 #Second show page (Perlib):
-class PerslibViewSet(viewsets.ModelViewSet):              #Perslib page needs authorization
+class PerslibViewSet(viewsets.ModelViewSet):              
   queryset = Perslib.objects.all()
   serializer_class = PerslibSerializer
-  permission_classes = [permissions.IsAuthenticated]
+  permission_classes = [permissions.IsAuthenticated]      #Perslib page needs authorization
 
  

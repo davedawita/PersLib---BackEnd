@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'perslib.apps.PerslibConfig',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken',
     
 ]
 
@@ -128,12 +129,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Authentication
 REST_FRAMEWORK = {
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.IsAuthenticated',
-    # ]
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
 
-    'DEFAULT_AUTHENTICATION_CLASSES': [                         #Here, I selected and put Basic Authentication out of the other authentication types. It provides access based on authentication against a user's username and password.
+    'DEFAULT_AUTHENTICATION_CLASSES': [                         #Here, I selected and put Basic Authentication out of the other authentication types. It provides access based on authentication against a user's username and password. It involves sending a username and password in the HTTP headers of each request. 
     #This is the place where I set the authentication globally instead of on a per-view basis.
-        'rest_framework.authentication.BasicAuthentication',        
+        'rest_framework.authentication.TokenAuthentication',        
     ]
 }
+#Note: The Django authentication system handles both authentication and authorization. Briefly, authentication verifies a user is who they claim to be, and authorization determines what an authenticated user is allowed to do. https://docs.djangoproject.com/en/5.0/topics/auth/
+
+LOGOUT_REDIRECT_URL = '/year' #This is added to redirect after logging out
