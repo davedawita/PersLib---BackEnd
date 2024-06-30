@@ -17,6 +17,7 @@ Users will need to create account and login if they need to access the app.
 **<h3>Back-end Repository</h3>**
 The backend repo can be accessed through the link below:</br>
 Important Note:</br>
+I created the Superuser functionality and I set myself as admin. Admin will have access to users data.
 Models are the database tables represented in Django as Python classes.</br>
 Views are the HTML returned from function in views.py.</br>
 Controllers are the actual functions themselves in views.py invoked from a HTTP request.</br>
