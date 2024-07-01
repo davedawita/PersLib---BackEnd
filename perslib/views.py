@@ -8,6 +8,7 @@ from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.authtoken.views import ObtainAuthToken, APIView
 from rest_framework.settings import api_settings
 from rest_framework import permissions
+from rest_framework.permissions import IsAuthenticated
 
 from rest_framework.decorators import action
 from rest_framework import permissions
@@ -26,15 +27,6 @@ class UserViewSet(viewsets.ModelViewSet):
   queryset = User.objects.all()     #This queryset tells the viewset how to retrieve the object from the database 
   
 
-  #To allow users not to access admin roles
-# def get_queryset(self):
-#         if self.request.user.is_authenticated and (
-#            self.request.user.is_superuser
-#         ):
-#             return self.queryset
-#         else:
-#           return PermissionDenied()
-
 class LoginViewSet(viewsets.ViewSet):
   #This checks username and password and returns an auth token.
   serializer_class = AuthTokenSerializer
@@ -47,7 +39,7 @@ class LoginViewSet(viewsets.ViewSet):
   
 
 class Logout(APIView):
-  permission_classes = [permissions.AllowAny]
+  permission_classes = [IsAuthenticated]
   def post(self, request,format=None):
     #To delete the token to force a login:
     request.user.auth_token.delete()

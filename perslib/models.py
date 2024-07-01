@@ -12,13 +12,12 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
   last_name = models.CharField(max_length=30)
   email = models.EmailField(max_length=255)  
   username = models.CharField(max_length=30, unique=True)
-  password = models.CharField(max_length=32)
-  profile_picture = models.ImageField(upload_to='profile_picture', blank=True, null=True)
-  # profileimages = models.ImageField(upload_to='images')
+  password = models.CharField(max_length=100)
+  profile_picture = models.ImageField(upload_to='profile_picture', blank=True, null=True)  
 
   is_staff = models.BooleanField(default=False)    #This is done because we don't need new users to come in as staff members.
   
-  objects = UserManager() #We can use this to help the superuser by manging other managers to handle accounts of users.
+  objects = UserManager() #We can use this to help the superuser by managing other managers to handle accounts of users.
 
   REQUIRED_FIELDS = ['first_name', 'last_name']
   USERNAME_FIELD = 'username'
@@ -33,7 +32,7 @@ class User(models.Model):
   password = models.CharField(max_length=32)
   profile_picture = models.ImageField(upload_to='profile_picture', blank=True, null=True)
   
-  is_staff = models.BooleanField(default=False) 
+  is_staff = models.BooleanField(default=False) #This is done because we don't need new users to come in as staff members.
   is_superuser = models.BooleanField(default=False) 
  
 
