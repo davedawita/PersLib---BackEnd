@@ -7,6 +7,7 @@ from rest_framework import filters
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.authtoken.views import ObtainAuthToken, APIView
 from rest_framework.settings import api_settings
+from rest_framework import permissions
 
 from rest_framework.decorators import action
 from rest_framework import permissions
@@ -23,8 +24,16 @@ class UserViewSet(viewsets.ModelViewSet):
   serializer_class = UserSerializer
   permission_classes = [permissions.AllowAny]
   queryset = User.objects.all()     #This queryset tells the viewset how to retrieve the object from the database 
-  filter_backend = (filters.SearchFilter,)
-  search_Fields = ('first_name', 'username')
+  
+
+  #To allow users not to access admin roles
+# def get_queryset(self):
+#         if self.request.user.is_authenticated and (
+#            self.request.user.is_superuser
+#         ):
+#             return self.queryset
+#         else:
+#           return PermissionDenied()
 
 class LoginViewSet(viewsets.ViewSet):
   #This checks username and password and returns an auth token.
@@ -48,13 +57,14 @@ class Logout(APIView):
 # Eventhough I set the authentication globally, I need to set the permission class since, by default the permission class is set to AllowAny.
 
 class YearViewSet(viewsets.ModelViewSet):
+  #Note: If ReadOnlyModelViewSet used in place of ModelViewSet, it does not allow editing! If checked by postman,POST & PUT will not succeed to create or change anything.
   queryset = Year.objects.all()
   serializer_class = YearSerializer
   permission_classes = [permissions.AllowAny]   #I let the index page visible without a need for authorization.
 
 
 #First show page (Titles):
-class TitleViewSet(viewsets.ReadOnlyModelViewSet):   #Here, I used ReadOnlyModelViewSet. This does not allow editing! If checked by postman,PUT will not succeed to change anything.
+class TitleViewSet(viewsets.ModelViewSet):   
   queryset = Title.objects.all()
   serializer_class = TitleSerializer
   permission_classes = [permissions.IsAuthenticated]     #Title page needs authorization

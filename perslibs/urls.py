@@ -14,11 +14,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-# from django.contrib import admin
+from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from perslib.views import UserViewSet, YearViewSet, TitleViewSet, PerslibViewSet, LoginViewSet, Logout
 from perslib import views
+from django.conf import settings   #Added for the purpose of profile picture or /static in seetings.py
+from django.conf.urls.static import static    #ditto
 
 #Notes:
 #ViewSets allow the developer to concentrate on modeling the state and interactions of the API, and leave the URL construction to be handled automatically. ViewSet classes are almost the same thing as View classes, except that they provide operations such as retrieve, or update, and not method handlers such as get or put.
@@ -37,8 +39,8 @@ router.register(r'perslib',PerslibViewSet)
 
 urlpatterns = [
 
-    # path('admin/', admin.site.urls),        
+    path('admin/', admin.site.urls),        
     path('', include(router.urls)), #Here, we include all the urls which are in the router above
-    path("logout/", Logout.as_view(), name="logout")   
+    path("logout/", Logout.as_view(), name="logout")   #Here, view class is used instead of viewset.
     
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)    #This is added for adding profile pictures.
