@@ -16,6 +16,8 @@ from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework import status
 
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+
 #Note: ReadOnlyModelViewSet only provide 'read-only' actions:list & .retrieve(). But, ModelViewSet on the otherhand provides the actions: .list(), .retrieve(), .create(), .update(), .partial_update(), and .destroy().
 
 #Authentication classes:
@@ -49,7 +51,7 @@ class Logout(APIView):
 # Eventhough I set the authentication globally, I need to set the permission class since, by default the permission class is set to AllowAny.
 
 class YearViewSet(viewsets.ModelViewSet):
-  #Note: If ReadOnlyModelViewSet used in place of ModelViewSet, it does not allow editing! If checked by postman,POST & PUT will not succeed to create or change anything.
+  #Note: If ReadOnlyModelViewSet is used in place of ModelViewSet, it does not allow editing! If checked by postman,POST & PUT will not succeed to create or change anything.
   queryset = Year.objects.all()
   serializer_class = YearSerializer
   permission_classes = [permissions.AllowAny]   #I let the index page visible without a need for authorization.
@@ -59,12 +61,13 @@ class YearViewSet(viewsets.ModelViewSet):
 class TitleViewSet(viewsets.ModelViewSet):   
   queryset = Title.objects.all()
   serializer_class = TitleSerializer
-  permission_classes = [permissions.IsAuthenticated]     #Title page needs authorization
+  permission_classes = [permissions.AllowAny]     #Title page needs authorization with "IsAuthenticated"
 
 #Second show page (Perlib):
 class PerslibViewSet(viewsets.ModelViewSet):              
   queryset = Perslib.objects.all()
   serializer_class = PerslibSerializer
-  permission_classes = [permissions.IsAuthenticated]      #Perslib page needs authorization
+  parser_classes = (MultiPartParser, FormParser, JSONParser)
+  permission_classes = [permissions.AllowAny]      #Perslib page needs authorization with "IsAuthenticated"
 
  
