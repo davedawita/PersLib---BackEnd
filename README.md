@@ -1,6 +1,9 @@
 # PersLib---BackEnd
 
 **<h3>Description</h3>**
+The back-end api can be accessed through the link below:
+
+https://perslib-api-a0147b4d28a7.herokuapp.com/year/
 
 PersLib is an application that can be utilized by users who need to record their pictures, videos, documents, etc. through the years. In addition, users can transfer dissiminated files and documents in their phones, laptops, hard discs, etc. to this PerLib (Personal Library) website. They can also create their account and access their footprints easily without getting frustrated with security. PerLib app alleviates the risk of loosing important pictures and documents through unexpected events such as losing a phone, malfunctioning of hard discs, etc.
 
@@ -9,7 +12,7 @@ The PersLib app has two repositories:</br>
  - PersLib_Front-End: is for front-end of the app with React & Node.js
  
 
-Users will need to create account and login if they need to access the app.
+Users will need to create account and login if they need to access the app. The only route accessible without login is /year.
 
 
 <h2>PersLib---Back-End</h2>
@@ -66,7 +69,7 @@ The following models are included: </br></br>
 POST /user/: Register a new user</br>
 POST /login/: Login a user</br>
 POST /logout/: Logs out a user</br>
-GET /user/profile/: Get user profile details</br>
+
 
  - **<h2>Index Page Route:</h2>** 
 POST/year: This creates the years
