@@ -1,9 +1,6 @@
 # PersLib---BackEnd
 
 **<h3>Description</h3>**
-The back-end api can be accessed through the link below:
-
-https://perslib-api-a0147b4d28a7.herokuapp.com/year/
 
 PersLib is an application that can be utilized by users who need to record their pictures, videos, documents, etc. through the years. In addition, users can transfer dissiminated files and documents in their phones, laptops, hard discs, etc. to this PerLib (Personal Library) website. They can also create their account and access their footprints easily without getting frustrated with security. PerLib app alleviates the risk of loosing important pictures and documents through unexpected events such as losing a phone, malfunctioning of hard discs, etc.
 
@@ -12,87 +9,16 @@ The PersLib app has two repositories:</br>
  - PersLib_Front-End: is for front-end of the app with React & Node.js
  
 
-Users will need to create account and login if they need to access the app. The only route accessible without login is /year.
+Users will need to create account and login if they need to access the app.
 
-
-<h2>PersLib---Back-End</h2>
-
-**<h3>Back-end Repository</h3>**
-The backend repo can be accessed through the link below:</br>
-Important Note:</br>
-I created the Superuser functionality and I set myself as admin. Admin will have access to users data.
-Models are the database tables represented in Django as Python classes.</br>
-Views are the HTML returned from function in views.py.</br>
-Controllers are the actual functions themselves in views.py invoked from a HTTP request.</br>
-I included both basic and token authentication methods to authorize user requests and enable them to create account, login, and logout.
-
-
-**<h3>MODELS:</h3>** 
-The following models are included: </br></br>
-
-<h2><b>perslib/models/user/:</b></h2></br>
-  
-    class User(models.Model):    
-      first_name = models.CharField(max_length=30)
-      last_name = models.CharField(max_length=30)
-      username = models.CharField(max_length=30)
-      password = models.CharField(max_length=32)
-      # profileimages = models.ImageField(upload_to='images')
-      REQUIRED_FIELDS = ['first_name', 'last_name', 'username', 'password']
-      
-<h2><b>perslib/models/login/:</b></h2></br>
-
-    class Login(models.Model)    
-      username = models.CharField(max_length=30)
-      password = models.CharField(max_length=32) 
-        
- <h2><b>perslib/models/year:</b></h2></b></br>
-  
-     class Year(models.Model):</br></br>      
-        Year = models.CharField(max_length=20)</br></br>  
-  
-<h2><b>perslib/models/title:</b></h2></b></br>
- 
-     class Title(models.Model):</br></br>    
-        title = models.CharField(max_length=20)</br></br>    
-
-<h2><b>perslib/models/perslib:</b></h2></b></br>
- 
-     class Perslib(models.Model):</br></br>
-        description = models.CharField(max_length=100)</br>
-        date = models.DateField(auto_now=False, auto_now_add=False)</br>
-        time = models.TimeField(auto_now=False, auto_now_add=False) </br>
-        
- <h2>ROUTES:</h2>   
- 
- - **<h2>User Routes:</h2>**
-POST /user/: Register a new user</br>
-POST /login/: Login a user</br>
-POST /logout/: Logs out a user</br>
-
-
- - **<h2>Index Page Route:</h2>** 
-POST/year: This creates the years
-GET /year: This lists the years which will direct us to titles page</br>
-Note: Editing and deleting the years is not allowed. I used "ReadOnlyModelViewSet" for the viewset class in views.py.
-
- - **<h2>Titles Page Routes:</h2>** 
-POST /title/: This adds a new title</br>
-GET /title/: This lists all titles</br>
-PUT /title/:id/: This updates a title</br>
-DELETE /title/:id/: This deletes a title</br>
-
- - **<h2>Documents/Perslib Routes:</h2>** 
-POST /perslib/: This adds a new document (picture, video, etc.)</br>
-GET /perslib/: This list all documents</br>
-PUT /perslib/:id/: This updates a document</br>
-DELETE /perslib/:id/: This deletes a document</br>
 
  <h2> PersLib---Front-End </h2></br>
 
  **<h3>Front-end Repository</h3>**
 The frontend repository can be accessed through the link below:</br>
 
+  https://perslib.netlify.app/
+  
 
  **<h3>Wireframes</h3>**
  
@@ -127,8 +53,84 @@ User Stories
 The folder structure includes components: Header, main & pages: Create, Edit, Index, & Show.</br>
 The app resides in App.js. User log-in/createaccount code is also in App.js.</br>
 
+<h2>PersLib---Back-End</h2>
+
+**<h3>Back-end Repository</h3>**
+The backend repo can be accessed through the link below:</br>
+Important Note:</br>
+I created the Superuser functionality and I set myself as admin. Admin will have access to users data.
+Models are the database tables represented in Django as Python classes.</br>
+Views are the HTML returned from function in views.py.</br>
+Controllers are the actual functions themselves in views.py invoked from a HTTP request.</br>
+
+
+**<h3>MODELS:</h3>** 
+The following models are included: </br></br>
+
+<h2><b>perslib/models/user/:</b></h2></br>
+  
+    class User(models.Model):    
+      first_name = models.CharField(max_length=30)
+      last_name = models.CharField(max_length=30)
+      username = models.CharField(max_length=30)
+      password = models.CharField(max_length=32)
+      # profileimages = models.ImageField(upload_to='images')
+      REQUIRED_FIELDS = ['first_name', 'last_name', 'username', 'password']
+      
+<h2><b>perslib/models/login/:</b></h2></br>
+
+    class Login(models.Model)    
+      username = models.CharField(max_length=30)
+      password = models.CharField(max_length=32) 
+        
+ <h2><b>perslib/models/year:</b></h2></b></br>
+  
+     class Year(models.Model):</br></br>      
+        Year = models.CharField(max_length=20)</br></br>  
+  
+<h2><b>perslib/models/title:</b></h2></b></br>
+ 
+     class Title(models.Model):</br></br>    
+        title = models.CharField(max_length=20)</br></br>    
+
+<h2><b>perslib/models/perslib:</b></h2></b></br>
+ 
+     class Perslib(models.Model):</br></br>
+        image_url = models.ImageField(upload_to='post_images', blank=True, null=True)
+        description = models.CharField(max_length=100)</br>
+        date = models.DateField(auto_now=False, auto_now_add=False)</br>
+        time = models.TimeField(auto_now=False, auto_now_add=False) </br>
+        
+ <h2>ROUTES:</h2>   
+ 
+ - **<h2>User Routes:</h2>**
+POST /user/: Register a new user</br>
+POST /login/: Login a user</br>
+POST /logout/: Logs out a user</br>
+
+
+ - **<h2>Index Page Route:</h2>** 
+POST/year: This creates the years
+GET /year: This lists the years which will direct us to titles page</br>
+Note: Editing and deleting the years is not allowed. I used "ReadOnlyModelViewSet" for the viewset class in views.py.
+
+ - **<h2>Titles Page Routes:</h2>** 
+POST /title/: This adds a new title</br>
+GET /title/: This lists all titles</br>
+PUT /title/:id/: This updates a title</br>
+DELETE /title/:id/: This deletes a title</br>
+
+ - **<h2>Documents/Perslib Routes:</h2>** 
+POST /perslib/: This adds a new document (picture, video, etc.)</br>
+GET /perslib/: This list all documents</br>
+PUT /perslib/:id/: This updates a document</br>
+DELETE /perslib/:id/: This deletes a document</br>
+
+
 <h2>Installation Instructions</h2>
  - Please use the link below to install the app. Enjoy the app!   </br>
+  
+  https://perslib.netlify.app/
  
  
 If you are on a browser, use of Google chrome is highly recommended.    </br>
@@ -139,6 +141,7 @@ If you are on a browser, use of Google chrome is highly recommended.    </br>
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![POSTGRESQL](https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![SQlite](https://img.shields.io/badge/SQLite-blue?logo=sqlite&logoColor=white)
+![Redux](https://img.shields.io/badge/-Redux-black?style=flat-square&logo=redux)
 ![Gunicorn Badge](https://img.shields.io/badge/Gunicorn-499848?logo=gunicorn&logoColor=fff&style=for-the-badge)
 ![.ENV Badge](https://img.shields.io/badge/.ENV-ECD53F?logo=dotenv&logoColor=000&style=for-the-badge)
 ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
@@ -165,7 +168,8 @@ Full CRUD(Create, Read, Update, Delete) Functionality. </br>
 Login and Logout access for users   </br>
 
 <h2>Troubleshooting</h2>
-Please click the back button of the browser to go back to previous page. Refresh the page.   </br>
+Please follow route guidelines above to go back to previous page. Refresh the page.   </br>
 
 <h2>Forthcoming Features</h2>
 In the future, we need users to be able to give access to family members so that the documents can be viewed by others. In addition, I need to learn Angular (FrontEnd Framework) and do this same app with it.
+
