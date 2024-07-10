@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from perslib.views import UserViewSet, YearViewSet, TitleViewSet, PerslibViewSet, LoginViewSet, Logout
+from perslib.views import YearViewSet, TitleViewSet, PerslibViewSet
 from perslib import views
 from django.conf import settings   #Added for the purpose of profile picture or /static in seetings.py
 from django.conf.urls.static import static    #ditto
@@ -29,8 +29,8 @@ from django.conf.urls.static import static    #ditto
 
 #Now, we need to register the view set we created in views.py to the urls:
 router = routers.DefaultRouter()
-router.register(r'user',UserViewSet, basename='user')
-router.register(r'login',LoginViewSet, basename='login')  # We need to give it a basename because it is not a model viewset and django rest framework will not identify this router.
+# router.register(r'user',UserViewSet, basename='user')
+# router.register(r'login',LoginViewSet, basename='login')  # We need to give it a basename because it is not a model viewset and django rest framework will not identify this router.
 # router.register(r'logout',Logout)
 
 router.register(r'year',YearViewSet)     
@@ -39,8 +39,9 @@ router.register(r'perslib',PerslibViewSet)
 
 urlpatterns = [
 
-    path('admin/', admin.site.urls),        
+    # path('admin/', admin.site.urls),        
     path('', include(router.urls)), #Here, we include all the urls which are in the router above
-    path("logout/", Logout.as_view(), name="logout")   #Here, view class is used instead of viewset.
+    # path("logout/", Logout.as_view(), name="logout")   #Here, view class is used instead of viewset.
     
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)    #This is added for adding profile pictures.
+]
+# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)    #This is added for adding profile pictures.

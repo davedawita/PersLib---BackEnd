@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'perslib.apps.PerslibConfig',
     'rest_framework',
-    'rest_framework.authtoken',
+    # 'rest_framework.authtoken',
     'corsheaders'
     
 ]
@@ -140,23 +140,23 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Authentication
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAdminUser',
-        'rest_framework.permissions.IsAuthenticated',
-    ],
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.IsAdminUser',
+#         'rest_framework.permissions.IsAuthenticated',
+#     ],
 
-    'DEFAULT_AUTHENTICATION_CLASSES': [                         #Here, I selected and put Basic Authentication out of the other authentication types. It provides access based on authentication against a user's username and password. It involves sending a username and password in the HTTP headers of each request. 
-    #This is the place where I set the authentication globally instead of on a per-view basis.
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.BasicAuthentication'
-    ]
-}
+#     'DEFAULT_AUTHENTICATION_CLASSES': [                         #Here, I selected and put Basic Authentication out of the other authentication types. It provides access based on authentication against a user's username and password. It involves sending a username and password in the HTTP headers of each request. 
+#     #This is the place where I set the authentication globally instead of on a per-view basis.
+#         'rest_framework.authentication.TokenAuthentication',
+#         'rest_framework.authentication.BasicAuthentication'
+#     ]
+# }
 #Note: The Django authentication system handles both authentication and authorization. Briefly, authentication verifies a user is who they claim to be, and authorization determines what an authenticated user is allowed to do. https://docs.djangoproject.com/en/5.0/topics/auth/
 
-AUTH_USER_MODEL = 'perslib.UserProfile'   #This is for django to use our UserProfile Model for admin functionality.
+# AUTH_USER_MODEL = 'perslib.UserProfile'   #This is for django to use our UserProfile Model for admin functionality.
 
-LOGOUT_REDIRECT_URL = '/year' #This is added to redirect after logging out
+# LOGOUT_REDIRECT_URL = '/year' #This is added to redirect after logging out
 
 #Below is an option if I need to disable the browsable api so that users cannot set themselves to access other's profile.
 # REST_FRAMEWORK = {
