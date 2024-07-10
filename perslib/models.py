@@ -66,7 +66,7 @@ def create_profile(sender, **kwargs):
       }
     
 class Login(models.Model):  
-  email = models.EmailField(max_length=255, blank=True, null=True)
+  username = models.CharField(max_length=30)
   password = models.CharField(max_length=32) 
 
 #Other Models:
